@@ -25,6 +25,7 @@ You can see it working on my website
 
 # How to use it
 - Html:
+You need 2 div, the parent will own the scrollbar, the child will be scrolled.
 ```html
 <div id="divNiceScrollSampleParent">
 	<div id="divNiceScrollSampleInside"></div>
@@ -32,6 +33,8 @@ You can see it working on my website
 ```
 
 - CSS:
+"padding-right" enable to get some space when the scrollbar grow.
+"padding" enable to get some space for the text scrolled.
 ```css
 #divNiceScrollSampleParent {
 	padding-right:10px;
