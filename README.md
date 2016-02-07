@@ -5,20 +5,20 @@ Nice scrolling Bar for browser on PC (mouse and touch events) and on Smartphones
 I needed a scrolling library for this personal website, and because I couldn't find a good one fitting all my needs, I just create my own :)
 
 # Infos
-• Get bigger when the mouse is next to it.
-• Scrolling working on Smartphone with the finder on the div you need to scroll.
-• Automatic adaptive scrolling even if content will appear later.
-• You can use a mouse on PC to move the scrollbar.
-• You can click inside the scrollbar to move quickly top or down.
-• You can use the scrolling button of the mouse to scroll content.
-• You can use scrolling content inside scrolling content.
-• Pixel perfect.
-• Support browser zooming.
+ - Get bigger when the mouse is next to it.
+ - Scrolling working on Smartphone with the finder on the div you need to scroll.
+ - Automatic adaptive scrolling even if content will appear later.
+ - You can use a mouse on PC to move the scrollbar.
+ - You can click inside the scrollbar to move quickly top or down.
+ - You can use the scrolling button of the mouse to scroll content.
+ - You can use scrolling content inside scrolling content.
+ - Pixel perfect.
+ - Support browser zooming.
 
 # Dependencies
-[jquery](https://jquery.com/)
-[jquery.mousewheel](https://github.com/jquery/jquery-mousewheel)
-[underscore](http://underscorejs.org/)
+ - [jquery](https://jquery.com/)
+ - [jquery.mousewheel](https://github.com/jquery/jquery-mousewheel)
+ - [underscore](http://underscorejs.org/)
 
 
 # Demo
