@@ -1,0 +1,66 @@
+
+/* TR Scrollbar */
+.tr_scrollbar {
+  width: 4px;
+  z-index: 1000;
+  overflow: hidden;
+  position: absolute;
+  /*top: 0px;*/
+/*  float: right;
+  right: 0px;*/
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.tr_scrollbar_background {
+  width: 4px;
+  background: rgba(50, 50, 50, 0.47);
+  float: right;
+  z-index: 1000;
+  overflow: hidden;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+.tr_scrollbar_inner {
+  width: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 1000;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  position: absolute;
+}
+.tr_scrollbar_inner:hover,
+.tr_scrollbar_inner_hover {
+  background: rgba(199, 224, 250, 0.9);
+  z-index: 1001;
+  overflow: hidden;
+}
+.tr_scrollbar_invible {
+  width: 30px;
+  margin-left: -10px;
+  background: rgba(255, 0, 0, 0);
+  z-index: 1000;
+  overflow: hidden;
+  border-radius: 2px;
+}
+/*
+.tr_scrollbar_invible:hover {
+    width:200px;
+    margin-left:100px;
+}
+*/
+.tr_scrollbar_width_hover {
+  width: 14px;
+  border-radius: 7px;
+}
+.tr_forbid_selection {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

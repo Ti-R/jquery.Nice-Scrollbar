@@ -1,0 +1,13 @@
+/***********************************************\
+|-                  TR Scroll                  -|
+|-                                             -|
+|-                              Ti-R           -|
+\***********************************************/
+
+ - Version 1.1.0
+	* Insert scrollbar before parent of the div because of a Firefox Bug
+		- Firefox: bug scrollbar absolute position is moving on scrolling content
+
+ - Version 1.0.0
+	* Release
+	
