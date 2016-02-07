@@ -1,9 +1,6 @@
 # Nice-Scrollbar
 Nice scrolling Bar for browser on PC (mouse and touch events) and on Smartphones (touch events). Big and slim, easy to integrate. Tested on Firefox/Chrome/Maxthon/iPhone/Android.
 
-# Reason
-I needed a scrolling library for this personal website, and because I couldn't find a good one fitting all my needs, I just create my own :)
-
 # Infos
  - Get bigger when the mouse is next to it.
  - Scrolling working on Smartphone with the finder on the div you need to scroll.
@@ -14,7 +11,8 @@ I needed a scrolling library for this personal website, and because I couldn't f
  - You can use scrolling content inside scrolling content.
  - Pixel perfect.
  - Support browser zooming.
-
+ 
+ 
 # Dependencies
  - [jquery](https://jquery.com/)
  - [jquery.mousewheel](https://github.com/jquery/jquery-mousewheel)
@@ -24,6 +22,38 @@ I needed a scrolling library for this personal website, and because I couldn't f
 # Demo
 You can see it working on my website
 [www.ti-r.com](http://www.ti-r.com/)
+
+# How to use it
+- Html:
+```html
+<div id="divNiceScrollSampleParent">
+	<div id="divNiceScrollSampleInside"></div>
+</div>
+```
+
+- CSS:
+```css
+#divNiceScrollSampleParent {
+	padding-right:10px;
+	height:152px;
+	width:580px;
+}
+
+#divNiceScrollSampleInside {
+	padding:5px;
+}
+```
+
+- Javascript:
+```js
+var niceScroll = new TR.NiceScroll("#divNiceScrollSampleInside");
+niceScroll.Add();
+// After you use it, you can remove remove it
+niceScroll.Remove();
+```
+
+# Reason
+I needed a scrolling library for this personal website, and because I couldn't find a good one fitting all my needs, I just create my own :)
 
 
 # Changelog
