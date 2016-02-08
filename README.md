@@ -22,7 +22,7 @@ Nice scrolling Bar for browser on PC (mouse and touch events) and on Smartphones
 
 # Demo
 When the user is far away, the scrollbar is hidden.
-When the user approach, the scrollbar appear.
+When the user approach, the scrollbar appear.__
 ![Nice-Scrollbar Nice-Scrollbar](http://www.ti-r.com/images/js/tr.nice.scroll.gif)
 
 You can test it on my website.
