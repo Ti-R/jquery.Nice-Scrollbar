@@ -8,6 +8,7 @@ Nice scrolling Bar for browser on PC (mouse and touch events) and on Smartphones
  - You can use a mouse on PC to move the scrollbar.
  - You can click inside the scrollbar to move quickly top or down.
  - You can use the scrolling button of the mouse to scroll content.
+ - You can click in the bar to quickly page up or down.
  - You can use scrolling content inside scrolling content.
  - Pixel perfect.
  - Support browser zooming.
@@ -20,7 +21,11 @@ Nice scrolling Bar for browser on PC (mouse and touch events) and on Smartphones
 
 
 # Demo
-You can see it working on my website
+When the user is far away, the scrollbar is hidden.
+When the user approach, the scrollbar appear.
+![Nice-Scrollbar Nice-Scrollbar](http://www.ti-r.com/images/js/tr.nice.scroll.gif)
+
+You can test it on my website.
 [www.ti-r.com](http://www.ti-r.com/)
 
 # How to use it
