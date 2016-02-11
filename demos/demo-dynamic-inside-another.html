@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+<script src="../tr.scroll.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../tr.scroll.css" type="text/css" />
+
+<style type="text/css">
+.divGrandParent{
+	position:relative;
+}
+.divParentContent {
+
+/* You need to set a size */
+	height:500px;
+	width:700px;
+
+/* Enable the scrollbar to do not go over the text when growing */
+	padding-right:10px;
+	
+    background:#777;
+	color:#DDD;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	margin:20px;
+}
+.divParent {
+
+/* You need to set a size */
+	height:152px;
+	width:580px;
+
+/* Enable the scrollbar to do not go over the text when growing */
+	padding-right:10px;
+	
+    background:#777;
+	color:#DDD;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	margin:20px;
+}
+.divInside {
+    padding:5px;
+}
+
+</style>
+  
+</head>
+<body>
+
+<!--divGrandParent is not necessary but assures the scrollbar to do not be moved.-->
+<div class="divGrandParent">
+	<div class="divParentContent">
+		<div id="contentParent" class="divInside">
+		</div>
+	</div>
+</div>
+
+</body>
+
+<script>
+	// Set the sample text
+	function SampleText()
+	{
+		return 'Inter haec Orfitus praefecti potestate regebat urbem aeternam ultra modum delatae dignitatis sese efferens insolenter, vir quidem prudens et forensium negotiorum oppido gnarus, sed splendore liberalium doctrinarum minus quam nobilem decuerat institutus, quo administrante seditiones sunt concitatae graves ob inopiam vini: huius avidis usibus vulgus intentum ad motus asperos excitatur et crebros.Nec vox accusatoris ulla licet subditicii in his malorum quaerebatur acervis ut saltem specie tenus crimina praescriptis legum committerentur, quod aliquotiens fecere principes saevi: sed quicquid Caesaris implacabilitati sedisset, id velut fas iusque perpensum confestim urgebatur impleri.Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti.Exsistit autem hoc loco quaedam quaestio subdifficilis, num quando amici novi, digni amicitia, veteribus sint anteponendi, ut equis vetulis teneros anteponere solemus. Indigna homine dubitatio! Non enim debent esse amicitiarum sicut aliarum rerum satietates; veterrima quaeque, ut ea vina, quae vetustatem ferunt, esse debet suavissima; verumque illud est, quod dicitur, multos modios salis simul edendos esse, ut amicitiae munus expletum sit.Adolescebat autem obstinatum propositum erga haec et similia multa scrutanda, stimulos admovente regina, quae abrupte mariti fortunas trudebat in exitium praeceps, cum eum potius lenitate feminea ad veritatis humanitatisque viam reducere utilia suadendo deberet, ut in Gordianorum actibus factitasse Maximini truculenti illius imperatoris rettulimus coniugem.';
+	}
+	
+	function ContentScroll( _id )
+	{
+		return '<div class="divGrandParent"> <div class="divParent"> <div id="'+_id+'" class="divInside"> </div> </div> </div>';
+	}
+	
+	$("#contentParent").append(SampleText());
+	$("#contentParent").append(ContentScroll("scrollcontent1"));
+	$("#contentParent").append(SampleText());
+	$("#contentParent").append(ContentScroll("scrollcontent2"));
+
+	$(".divInside").append(SampleText());
+			
+	var gNiceScroll = {};
+	
+	// Function to add Nice Scrollbar
+	function AddNiceScrollbar( _id )
+	{
+		if( _.has(gNiceScroll, _id) )
+			gNiceScroll[_id].Remove();
+		gNiceScroll[_id] = new TR.NiceScroll("#" + _id);
+		gNiceScroll[_id].Add();
+	}
+	
+	// Add scrollbar to child content
+	AddNiceScrollbar("scrollcontent1");
+	AddNiceScrollbar("scrollcontent2");
+	
+	// Add scrollbar to parent
+	AddNiceScrollbar("contentParent");
+	
+</script>
+</html>

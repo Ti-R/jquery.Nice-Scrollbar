@@ -27,7 +27,19 @@ When the user approach, the scrollbar appear.
 ![Nice-Scrollbar Nice-Scrollbar](http://www.ti-r.com/images/js/tr.nice.scroll.gif)
 
 You can test it on my website.
-[www.ti-r.com](http://www.ti-r.com/)
+[www.ti-r.com (NiceScroll)](http://home/www.ti-r.com_2015/?js/Web/NiceScroll)
+
+There is 3 demos inside demos directory
+- demo-basic.html:
+	* It show how to use it with a very basic sample.
+
+- demo-dynamic-add-content:
+	* Same as basic but you can add content to the scroll div.
+	* The scrollbar is automatically changing size.
+
+- demo-dynamic-inside-another:
+	* Enable to see scrolled content inside another scrolled control.
+
 
 # How to use it
 - Html:
@@ -62,10 +74,15 @@ niceScroll.Remove();
 ```
 
 # Reason
-I needed a scrolling library for this personal website, and because I couldn't find a good one fitting all my needs, I just create my own :)
+I needed a scrolling library for my personal website, and because I couldn't find a good one fitting all my needs, I just create my own :)
 
 
 # Changelog
+ - Version 1.2.0
+	* Fix a bug where too much content to scroll make the cursor too small.
+	* Fix a bug on placement for some cases.
+	* Add namespace for global vars
+		
  - Version 1.1.0
 	* Insert scrollbar before parent of the div because of a Firefox Bug
 		- Firefox: bug scrollbar absolute position is moving on scrolling content

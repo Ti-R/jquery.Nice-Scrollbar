@@ -1,28 +1,30 @@
 // Author: Ti-R (Renan Lavarec)
 // License: MIT
-// Version: 1.1.0
-
-var gDebugScroll = false;
-
-// Mouse
-var gScrollMouse = {x: 0, y: 0};
-var gTouchMouse = {y: 0};
-
-
-document.addEventListener('mousemove', function(e){ 
-    gScrollMouse.x = e.clientX || e.pageX; 
-    gScrollMouse.y = e.clientY || e.pageY;
-}, false);
-
+// Version: 1.2.0
 
 // Namespace TR
 if( _.isUndefined(TR) )
 	var TR = {};
 
 
+TR.DebugScroll = false;
+
+// Mouse
+TR.ScrollMouse = {x: 0, y: 0};
+TR.TouchMouse = {y: 0};
+
+document.addEventListener('mousemove', function(e){ 
+    TR.ScrollMouse.x = e.clientX || e.pageX; 
+    TR.ScrollMouse.y = e.clientY || e.pageY;
+}, false);
+
+
 // Create the nice scroll struct
 TR.NiceScroll = function ( _id_child )
 {
+	// Minimum size for the inner scroll
+	this.mScrollInnerSizeMin = 20;
+
 	// Id Child
 	this.mIdChild = _id_child;
 // Intervals
@@ -78,7 +80,7 @@ TR.NiceScroll.prototype.Add = function()
 //  		event.preventDefault();
 //	});
 	
-	if( gDebugScroll )
+	if( TR.DebugScroll )
 	{
 		if( tDiv.length )
 			console.log("TR.NiceScroll.Add -> " + this.mIdChild + " is found and attached");
@@ -99,21 +101,21 @@ TR.NiceScroll.prototype.Add = function()
 	
 	tDiv.unbind("touchstart").children().bind('touchstart', function(event) {
 		
-	 if( gDebugScroll )
+	 if( TR.DebugScroll )
 		  console.log("touchstart");
 		  
-		gTouchMouse.y = event.originalEvent.changedTouches[0].pageY;
+		TR.TouchMouse.y = event.originalEvent.changedTouches[0].pageY;
 			
 		$(this).unbind("touchmove").bind('touchmove', function(event) {
 			event.preventDefault();
 			
-		//	if( event.originalEvent.changedTouches[0].pageY-gTouchMouse.y > 10)
+		//	if( event.originalEvent.changedTouches[0].pageY-TR.TouchMouse.y > 10)
 			{
-	 			if( gDebugScroll )
-					console.log("touchmove ", event.originalEvent.changedTouches[0].pageY-gTouchMouse.y + " px");	
+	 			if( TR.DebugScroll )
+					console.log("touchmove ", event.originalEvent.changedTouches[0].pageY-TR.TouchMouse.y + " px");	
 	
-				ScrollBarScrollAction((event.originalEvent.changedTouches[0].pageY-gTouchMouse.y), false, false);
-				gTouchMouse.y = event.originalEvent.changedTouches[0].pageY;
+				ScrollBarScrollAction((event.originalEvent.changedTouches[0].pageY-TR.TouchMouse.y), false, false);
+				TR.TouchMouse.y = event.originalEvent.changedTouches[0].pageY;
 			}
 		});
 		
@@ -123,19 +125,19 @@ TR.NiceScroll.prototype.Add = function()
 		}
 		
 		$(this).unbind("touchend").bind('touchend', function(event) {
-	 		if( gDebugScroll )
+	 		if( TR.DebugScroll )
 				console.log("touchend");	
 			_.bind(UnbindAll, this)();
 		});
 		
 		$(this).unbind("touchcancel ").bind('touchcancel ', function(event) {
-	 		if( gDebugScroll )
+	 		if( TR.DebugScroll )
 	 			console.log("touchcancel");	
 			_.bind(UnbindAll, this)();
 		});
 	});
 	
-	
+	var tThis = this;
 	// If mouse set to true or this is for the scrollbar
 	function ScrollBarScrollAction( _pixels, _is_mouse, _is_scrollbar )
 	{
@@ -151,7 +153,7 @@ TR.NiceScroll.prototype.Add = function()
 			return;
 		var tScrollBarInner = tScrollBar.find('.tr_scrollbar_inner');
 
-	 	if( gDebugScroll )
+	 	if( TR.DebugScroll )
 	 	{
 			console.log("_pixels:", _pixels);
 			console.log("tParentHeight:", tParentHeight);
@@ -160,7 +162,9 @@ TR.NiceScroll.prototype.Add = function()
 		}
 
 		var tMaxHeightBackgroundScrollBar = ((tParentHeight) - ((tParentHeight/tChildHeight)*tParentHeight));
-		
+		if( tMaxHeightBackgroundScrollBar+tThis.mScrollInnerSizeMin > tParentHeight)
+			tMaxHeightBackgroundScrollBar = tParentHeight-tThis.mScrollInnerSizeMin;
+
 		if( _is_mouse )
 		{
 			if( _is_scrollbar )
@@ -169,7 +173,7 @@ TR.NiceScroll.prototype.Add = function()
 				var tScrollBarInnerPositionTop = -tScrollBarInner.position().top;
 				var tNewTopPosition = (-tScrollBarInnerPositionTop)-_pixels;
 	
-	 			if( gDebugScroll )
+	 			if( TR.DebugScroll )
 	 			{
 					console.log("tScrollBarInnerPositionTop:", tScrollBarInnerPositionTop);
 				}
@@ -198,7 +202,7 @@ TR.NiceScroll.prototype.Add = function()
 				var tScrollBarInnerPositionTop = -tDivParent.scrollTop();
 				var tNewTopPosition = (-tScrollBarInnerPositionTop)-_pixels;
 	
-	 			if( gDebugScroll )
+	 			if( TR.DebugScroll )
 	 			{
 					console.log("tScrollBarInnerPositionTop:", tScrollBarInnerPositionTop);
 				}
@@ -229,7 +233,7 @@ TR.NiceScroll.prototype.Add = function()
 			var tScrollBarInnerPositionTop = -tDivParent.scrollTop();
 			var tNewTopPosition = (-tScrollBarInnerPositionTop)-_pixels;
 
- 			if( gDebugScroll )
+ 			if( TR.DebugScroll )
  			{
 				console.log("tScrollBarInnerPositionTop:", tScrollBarInnerPositionTop);
 			}
@@ -268,19 +272,12 @@ TR.NiceScroll.prototype.Add = function()
 		
 	
 		var tParentHeight = tDivParent.innerHeight();
-		var tParentMarginTop = parseFloat(tDivParent.css('margin-top')) - parseFloat(tDivParent.css('padding-top'));
-		//var tParentPadding = tDivParent.css('padding-top')+tDivParent.css('padding-bottom');
+		var tParentMarginTop = 0;
+
 		var tChildHeight = tDiv.outerHeight();
-	//	tDivParent += tParentPadding;
 			
 		if( tParentHeight < tChildHeight )
 		{
-			// Fix marging bug after absolute position (workarround FF/Chrome)
-			if( tParentMarginTop<5 )
-				tParentMarginTop = 0;
-			else
-				tParentMarginTop -= 5;
-			
 			tParentMarginTop += parseFloat(tDivParent.css('border-top-width'));
 		
 			var tHtml = '';
@@ -294,7 +291,7 @@ TR.NiceScroll.prototype.Add = function()
 			$(tHtml).insertBefore( tDivParent );
 			
 			var tScrollingMoving = false;
-			var tMousePosInYOnMouseDown = gScrollMouse.y;
+			var tMousePosInYOnMouseDown = TR.ScrollMouse.y;
 			//var tScrollBar= tDivParent.children('.tr_scrollbar')
 			var tScrollBar = tDivParent.prev();
 			if( !tScrollBar )
@@ -306,7 +303,10 @@ TR.NiceScroll.prototype.Add = function()
 			var tScrollBarInnerPositionTop = 0;
 			var tScrollBarBackground = tScrollBar.children('.tr_scrollbar_background');
 			
-			
+			// Min inner height
+			if( tScrollBarInner.height()<tThis.mScrollInnerSizeMin )
+				tScrollBarInner.height(tThis.mScrollInnerSizeMin);
+				
 			tScrollBar.css({"margin-left":(tDivParent.outerWidth()- parseFloat(tDivParent.css("border-left-width"))- parseFloat(tDivParent.css("border-right-width"))+parseFloat(tDivParent.css("margin-left"))-30) + "px"});
 			
 			var tCountEnterDivs = 0;
@@ -317,7 +317,7 @@ TR.NiceScroll.prototype.Add = function()
 			// Click on scrollbar
 			tScrollBarBackground.click(function(event) {
 			
-				if( gScrollMouse.y < tScrollBarInner.offset().top )
+				if( TR.ScrollMouse.y < tScrollBarInner.offset().top )
 				{
 					// Mouse on top of the inner
 					ScrollBarScrollAction(tScrollBarBackground.height()*0.8, false, true);
@@ -339,7 +339,7 @@ TR.NiceScroll.prototype.Add = function()
 			
 			tScrollBarInner.mousedown(function(){
 				tCountEnterDivs = 1;
-				tMousePosInYOnMouseDown = gScrollMouse.y;
+				tMousePosInYOnMouseDown = TR.ScrollMouse.y;
 				tScrollBarInnerPositionTop = tScrollBarInner.position().top;
 				
 			    tScrollingMoving = true;
@@ -364,7 +364,7 @@ TR.NiceScroll.prototype.Add = function()
 						TR.SetScrollBarBigger( tIdChild, true );
 				    }
 				    	
-					tMousePosInYOnMouseDown = gScrollMouse.y;
+					tMousePosInYOnMouseDown = TR.ScrollMouse.y;
 				});
 			});
 			
@@ -378,7 +378,7 @@ TR.NiceScroll.prototype.Add = function()
 			
 			
 			function setScrollingPosition() {
-			    ScrollBarScrollAction( tMousePosInYOnMouseDown-gScrollMouse.y, true, true);
+			    ScrollBarScrollAction( tMousePosInYOnMouseDown-TR.ScrollMouse.y, true, true);
 			}
 		}
 	}
