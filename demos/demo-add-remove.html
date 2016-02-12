@@ -26,6 +26,8 @@
 	border-style: solid;
 	border-color: rgb(255, 255, 255);
 	margin:20px;
+		
+	overflow:auto;
 }
 #divInside {
     padding:5px;
@@ -35,6 +37,9 @@
   
 </head>
 <body>
+
+<button onclick="AddNiceScrollbar()">Add</button>
+<button onclick="RemoveNiceScrollbar()">Remove</button>
 
 <div id="divParent">
 	<div id="divInside">
@@ -59,12 +64,18 @@
 	// Function to add Nice Scrollbar
 	function AddNiceScrollbar()
 	{
-		if( gNiceScroll )
-			gNiceScroll.Remove();
+		RemoveNiceScrollbar();
+		
 		gNiceScroll = new TR.NiceScroll("#divInside");
 		gNiceScroll.Add();
 	}
 	
-	AddNiceScrollbar();
+	// Function to remove Nice Scrollbar
+	function RemoveNiceScrollbar()
+	{
+		if( gNiceScroll )
+			gNiceScroll.Remove();
+	}
+	
 </script>
 </html>

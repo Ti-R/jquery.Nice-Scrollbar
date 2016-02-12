@@ -36,23 +36,27 @@
 </head>
 <body>
 
+<button onclick="AddContent()">Add Content</button>
+
 <div id="divParent">
 	<div id="divInside">
 	</div>
 </div>
 
-
 </body>
 
 <script>
-
 	// Set the sample text
 	function SampleText()
 	{
 		return 'Inter haec Orfitus praefecti potestate regebat urbem aeternam ultra modum delatae dignitatis sese efferens insolenter, vir quidem prudens et forensium negotiorum oppido gnarus, sed splendore liberalium doctrinarum minus quam nobilem decuerat institutus, quo administrante seditiones sunt concitatae graves ob inopiam vini: huius avidis usibus vulgus intentum ad motus asperos excitatur et crebros.Nec vox accusatoris ulla licet subditicii in his malorum quaerebatur acervis ut saltem specie tenus crimina praescriptis legum committerentur, quod aliquotiens fecere principes saevi: sed quicquid Caesaris implacabilitati sedisset, id velut fas iusque perpensum confestim urgebatur impleri.Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti.Exsistit autem hoc loco quaedam quaestio subdifficilis, num quando amici novi, digni amicitia, veteribus sint anteponendi, ut equis vetulis teneros anteponere solemus. Indigna homine dubitatio! Non enim debent esse amicitiarum sicut aliarum rerum satietates; veterrima quaeque, ut ea vina, quae vetustatem ferunt, esse debet suavissima; verumque illud est, quod dicitur, multos modios salis simul edendos esse, ut amicitiae munus expletum sit.Adolescebat autem obstinatum propositum erga haec et similia multa scrutanda, stimulos admovente regina, quae abrupte mariti fortunas trudebat in exitium praeceps, cum eum potius lenitate feminea ad veritatis humanitatisque viam reducere utilia suadendo deberet, ut in Gordianorum actibus factitasse Maximini truculenti illius imperatoris rettulimus coniugem.';
 	}
-	$("#divInside").html(SampleText());
-
+	
+	function AddContent()
+	{
+		$("#divInside").append(SampleText());
+	}
+	AddContent();
 	
 	var gNiceScroll;
 	
@@ -61,7 +65,7 @@
 	{
 		if( gNiceScroll )
 			gNiceScroll.Remove();
-		gNiceScroll = new TR.NiceScroll("#divInside");
+		gNiceScroll = new TR.NiceScroll("#divInside", {"ForceScrollingMax":2, "ScrollInnerSizeMin":50} );
 		gNiceScroll.Add();
 	}
 	

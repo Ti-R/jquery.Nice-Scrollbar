@@ -10,9 +10,7 @@
 <link rel="stylesheet" href="../tr.scroll.css" type="text/css" />
 
 <style type="text/css">
-.divGrandParent{
-	position:relative;
-}
+
 .divParentContent {
 
 /* You need to set a size */
@@ -54,11 +52,8 @@
 </head>
 <body>
 
-<!--divGrandParent is not necessary but assures the scrollbar to do not be moved.-->
-<div class="divGrandParent">
-	<div class="divParentContent">
-		<div id="contentParent" class="divInside">
-		</div>
+<div class="divParentContent">
+	<div id="contentParent" class="divInside">
 	</div>
 </div>
 
@@ -73,7 +68,7 @@
 	
 	function ContentScroll( _id )
 	{
-		return '<div class="divGrandParent"> <div class="divParent"> <div id="'+_id+'" class="divInside"> </div> </div> </div>';
+		return '<div class="divParent"> <div id="'+_id+'" class="divInside"> </div> </div>';
 	}
 	
 	$("#contentParent").append(SampleText());

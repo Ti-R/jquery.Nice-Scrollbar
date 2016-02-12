@@ -1,6 +1,6 @@
 // Author: Ti-R (Renan Lavarec)
 // License: MIT
-// Version: 1.2.0
+// Version: 1.3.0
 
 // Namespace TR
 if( _.isUndefined(TR) )
@@ -20,15 +20,41 @@ document.addEventListener('mousemove', function(e){
 
 
 // Create the nice scroll struct
-TR.NiceScroll = function ( _id_child )
+TR.NiceScroll = function ( _id_child, options )
 {
+	// BEGIN ---- OPTIONS ----
+	this.mOptions = {};
+	
 	// Minimum size for the inner scroll
-	this.mScrollInnerSizeMin = 20;
-
+	this.mOptions.ScrollInnerSizeMin = 20;
+	
+	// Value to set to force scrolling 
+	this.mOptions.ForceScrollingMax = 5;
+	
+	// Enable to force scrolling 
+	this.mOptions.EnableForceScrolling = true;
+	// END ---- OPTIONS ----
+	
 	// Id Child
 	this.mIdChild = _id_child;
-// Intervals
+	
+	// Save Interval
 	this.mInterval = undefined;
+	
+	// Enable to count before to force scrolling
+	this.mForceScrollingCount = 0;
+	
+	
+	// Merge options
+	var tThis = this;
+	function MergeOptions( _value, _key )
+	{
+		if( _.has(options, _key) )
+		{
+			tThis.mOptions[_key] = options[_key];
+		}
+	}
+	_.each(this.mOptions, MergeOptions);
 }
 
 ///
@@ -39,12 +65,23 @@ TR.NiceScroll.prototype.Remove = function()
 	var tDiv = $( this.mIdChild );
 	var tDivParent = tDiv.parent();
 	
+	// Get NodeNiceScroll
+	var tNodeNiceScroll = tDivParent.parent();
+	if( !tNodeNiceScroll.hasClass('NodeNiceScroll') )
+		return;
+	
+	// Move content before NodeNiceScroll and destroy NodeNiceScroll
+	tDivParent.insertBefore(tNodeNiceScroll);
+	tNodeNiceScroll.remove();
+	
 	// Remove timer
 	if( this.mInterval != undefined)
 	{
 		window.clearInterval(this.mInterval);
 		this.mInterval = undefined;
 	} 
+	
+	tDivParent.css("overflow", "auto");
 	
 	//var tScrollBar = tDivParent.children('.tr_scrollbar');
 	var tScrollBar = tDivParent.prev();
@@ -57,11 +94,11 @@ TR.NiceScroll.prototype.Remove = function()
 	tScrollBar.remove();
 	
 	// Mouse wheel (for the body to scroll)
-	tDiv.unbind("mousewheel");
+	tDiv.unbind("mousewheel.tr_scroll");
 	
-	tDiv.unbind("touchstart");
+	tDiv.unbind("touchstart.tr_scroll");
 	
-	tDiv.unbind("touchmove");
+	tDiv.unbind("touchmove.tr_scroll");
 	
 }
 	
@@ -74,6 +111,10 @@ TR.NiceScroll.prototype.Add = function()
 	
 	var tDiv = $( this.mIdChild );
 	var tDivParent = tDiv.parent();
+	
+	var tNodeHtml = '<div class="NodeNiceScroll" style="position:relative;"></div>';
+	$(tNodeHtml).insertBefore( tDivParent );
+	tDivParent.prev().append(tDivParent);
 	
 //	tDivParent.unbind("scroll").scroll(function(event) {
 //  		console.log( " PARENT: Handler for .scroll() called.", event  );
@@ -90,29 +131,32 @@ TR.NiceScroll.prototype.Add = function()
 		
 	function MouseWheelAction(event)
 	{
-		ScrollBarScrollAction((/*event.deltaY*event.deltaFactor*/event.deltaY*200), true, false);
+		return ScrollBarScrollAction((/*event.deltaY*event.deltaFactor*/event.deltaY*200), true, false);
 	}	
 
 	// Mouse wheel (for the body to scroll)
-	tDiv.unbind("mousewheel").mousewheel(function(event) {
-		MouseWheelAction(event);
-		return false; 
+	tDiv.unbind("mousewheel.tr_scroll").bind('mousewheel.tr_scroll', function(event) {
+		if(MouseWheelAction(event))
+			return false;
+			
+		// Can give the event to the parent	
+		return true; 
 	});
 	
-	tDiv.unbind("touchstart").children().bind('touchstart', function(event) {
+	tDiv.unbind("touchstart.tr_scroll").children().bind('touchstart.tr_scroll', function(event) {
 		
 	 if( TR.DebugScroll )
-		  console.log("touchstart");
+		  console.log("touchstart.tr_scroll");
 		  
 		TR.TouchMouse.y = event.originalEvent.changedTouches[0].pageY;
 			
-		$(this).unbind("touchmove").bind('touchmove', function(event) {
+		$(this).unbind("touchmove.tr_scroll").bind('touchmove.tr_scroll', function(event) {
 			event.preventDefault();
 			
 		//	if( event.originalEvent.changedTouches[0].pageY-TR.TouchMouse.y > 10)
 			{
 	 			if( TR.DebugScroll )
-					console.log("touchmove ", event.originalEvent.changedTouches[0].pageY-TR.TouchMouse.y + " px");	
+					console.log("touchmove", event.originalEvent.changedTouches[0].pageY-TR.TouchMouse.y + " px");	
 	
 				ScrollBarScrollAction((event.originalEvent.changedTouches[0].pageY-TR.TouchMouse.y), false, false);
 				TR.TouchMouse.y = event.originalEvent.changedTouches[0].pageY;
@@ -121,16 +165,16 @@ TR.NiceScroll.prototype.Add = function()
 		
 		function UnbindAll()
 		{
-			$(this).unbind("touchend").unbind("touchcancel");
+			$(this).unbind("touchend.tr_scroll").unbind("touchcancel.tr_scroll");
 		}
 		
-		$(this).unbind("touchend").bind('touchend', function(event) {
+		$(this).unbind("touchend.tr_scroll").bind('touchend.tr_scroll', function(event) {
 	 		if( TR.DebugScroll )
 				console.log("touchend");	
 			_.bind(UnbindAll, this)();
 		});
 		
-		$(this).unbind("touchcancel ").bind('touchcancel ', function(event) {
+		$(this).unbind("touchcancel.tr_scroll").bind('touchcancel.tr_scroll', function(event) {
 	 		if( TR.DebugScroll )
 	 			console.log("touchcancel");	
 			_.bind(UnbindAll, this)();
@@ -153,6 +197,9 @@ TR.NiceScroll.prototype.Add = function()
 			return;
 		var tScrollBarInner = tScrollBar.find('.tr_scrollbar_inner');
 
+
+		var tCurrentTopPos = tDivParent.scrollTop();
+
 	 	if( TR.DebugScroll )
 	 	{
 			console.log("_pixels:", _pixels);
@@ -162,8 +209,8 @@ TR.NiceScroll.prototype.Add = function()
 		}
 
 		var tMaxHeightBackgroundScrollBar = ((tParentHeight) - ((tParentHeight/tChildHeight)*tParentHeight));
-		if( tMaxHeightBackgroundScrollBar+tThis.mScrollInnerSizeMin > tParentHeight)
-			tMaxHeightBackgroundScrollBar = tParentHeight-tThis.mScrollInnerSizeMin;
+		if( tMaxHeightBackgroundScrollBar+tThis.mOptions.ScrollInnerSizeMin > tParentHeight)
+			tMaxHeightBackgroundScrollBar = tParentHeight-tThis.mOptions.ScrollInnerSizeMin;
 
 		if( _is_mouse )
 		{
@@ -256,6 +303,21 @@ TR.NiceScroll.prototype.Add = function()
 		    tScrollBarInner.css({ top: tScrollNewTopPosition+'px' });
 		}
 
+		if( tCurrentTopPos === tDivParent.scrollTop())
+		{
+			if( tThis.mOptions.EnableForceScrolling )
+			{
+				++tThis.mForceScrollingCount;
+				if( tThis.mForceScrollingCount > tThis.mOptions.ForceScrollingMax)
+				{
+					tThis.mForceScrollingCount = 0;
+					return false;
+				}
+			}
+			return true;
+		}
+		tThis.mForceScrollingCount = 0;
+		return true;
 	}
 
 	var tIdChild = this.mIdChild;
@@ -304,8 +366,8 @@ TR.NiceScroll.prototype.Add = function()
 			var tScrollBarBackground = tScrollBar.children('.tr_scrollbar_background');
 			
 			// Min inner height
-			if( tScrollBarInner.height()<tThis.mScrollInnerSizeMin )
-				tScrollBarInner.height(tThis.mScrollInnerSizeMin);
+			if( tScrollBarInner.height()<tThis.mOptions.ScrollInnerSizeMin )
+				tScrollBarInner.height(tThis.mOptions.ScrollInnerSizeMin);
 				
 			tScrollBar.css({"margin-left":(tDivParent.outerWidth()- parseFloat(tDivParent.css("border-left-width"))- parseFloat(tDivParent.css("border-right-width"))+parseFloat(tDivParent.css("margin-left"))-30) + "px"});
 			

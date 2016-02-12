@@ -12,6 +12,7 @@ Nice scrolling Bar for browser on PC (mouse and touch events) and on Smartphones
  - You can use scrolling content inside scrolling content.
  - Pixel perfect.
  - Support browser zooming.
+ - Add "force scrolling" by scrolling more on extrem position (top or bottom) when 1 scroll element is child of another one. (option) (enable by default)
  
  
 # Dependencies
@@ -29,7 +30,7 @@ When the user approach, the scrollbar appear.
 You can test it on my website.
 [www.ti-r.com (NiceScroll)](http://home/www.ti-r.com_2015/?js/Web/NiceScroll)
 
-There is 3 demos inside demos directory
+There is 5 demos inside demos directory
 - demo-basic.html:
 	* It show how to use it with a very basic sample.
 
@@ -39,6 +40,12 @@ There is 3 demos inside demos directory
 
 - demo-dynamic-inside-another:
 	* Enable to see scrolled content inside another scrolled control.
+
+- demo-set-options:
+	* Show how to set options.
+
+- demo-add-remove:
+	* Show how to add remove scrolling.
 
 
 # How to use it
@@ -78,6 +85,15 @@ I needed a scrolling library for my personal website, and because I couldn't fin
 
 
 # Changelog
+ - Version 1.3.0
+	* Add/Remove events binding with namespace.
+	* Add a grandparent node automatically.
+	* Enable to force scrolling by scrolling more on extreme position (top or bottom) when 1 scroll element is child of another one. (enable by default)
+	* Add options:
+		* Set the size of the minimum inner size height
+		* Activate force scrolling
+		* Set force scrolling attempt before to continue to scroll over the screen
+	
  - Version 1.2.0
 	* Fix a bug where too much content to scroll make the cursor too small.
 	* Fix a bug on placement for some cases.
