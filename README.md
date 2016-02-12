@@ -28,7 +28,7 @@ When the user approach, the scrollbar appear.
 ![Nice-Scrollbar Nice-Scrollbar](http://www.ti-r.com/images/js/tr.nice.scroll.gif)
 
 You can test it on my website.
-[www.ti-r.com (NiceScroll)](http://home/www.ti-r.com_2015/?js/Web/NiceScroll)
+[www.ti-r.com (NiceScroll)](http://www.ti-r.com/images/?js/Web/NiceScroll)
 
 There is 5 demos inside demos directory
 - demo-basic.html:
