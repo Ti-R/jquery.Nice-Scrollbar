@@ -1,6 +1,6 @@
 // Author: Ti-R (Renan Lavarec)
 // License: MIT
-// Version: 1.3.0
+// Version: 1.3.1
 
 // Namespace TR
 if( _.isUndefined(TR) )
@@ -46,15 +46,18 @@ TR.NiceScroll = function ( _id_child, options )
 	
 	
 	// Merge options
-	var tThis = this;
-	function MergeOptions( _value, _key )
+	if( options )
 	{
-		if( _.has(options, _key) )
+		var tThis = this;
+		function MergeOptions( _value, _key )
 		{
-			tThis.mOptions[_key] = options[_key];
+			if( _.has(options, _key) )
+			{
+				tThis.mOptions[_key] = options[_key];
+			}
 		}
+		_.each(this.mOptions, MergeOptions);
 	}
-	_.each(this.mOptions, MergeOptions);
 }
 
 ///
@@ -448,11 +451,14 @@ TR.NiceScroll.prototype.Add = function()
 	// Use this hack to check every half second if size change
 	var tLastWidth = -1;
 	var tLastHeight = -1;
+	var tLastHeightParent = -1;
 	this.mInterval = setInterval(function () {
-        if ((tLastWidth != tDiv.width()) || (tLastHeight != tDiv.innerHeight())) {
+        if ((tLastWidth != tDiv.width()) || (tLastHeight != tDiv.innerHeight()) ||
+        	(tLastHeightParent != tDivParent.innerHeight()) ) {
+        	
             tLastWidth = tDiv.width();
             tLastHeight = tDiv.innerHeight();
-			
+			tLastHeightParent = tDivParent.innerHeight();
 			AddScrollIfNeed();
         }
     }, 500);

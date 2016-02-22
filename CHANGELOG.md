@@ -4,6 +4,10 @@
 |-                              Ti-R           -|
 \***********************************************/
 
+ - Version 1.3.1
+	* Bug fix on options.
+	* Update scrollbar on parent resize.
+	
  - Version 1.3.0
 	* Add/Remove events binding with namespace.
 	* Add a grandparent node automaticaly.
