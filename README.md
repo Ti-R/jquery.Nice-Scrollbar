@@ -76,7 +76,7 @@ You need 2 div, the parent will own the scrollbar, the child will be scrolled.
 ```js
 var niceScroll = new TR.NiceScroll("#divNiceScrollSampleInside");
 niceScroll.Add();
-// After you use it, you can remove remove it
+// After you use it, you can remove it
 niceScroll.Remove();
 ```
 
