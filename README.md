@@ -1,5 +1,5 @@
 # Nice-Scrollbar
-jQuery based scrolling Bar, for PC and Smartphones (touch events). It is modern slim, easy to integrate, easy to use. Tested on Firefox/Chrome/Maxthon/iPhone/Android.
+jQuery based scrolling Bar, for PC and Smartphones (touch events). It is modern slim, easy to integrate, easy to use. Tested on Firefox/Chrome/Maxthon/iPhone/Android. Very light <7ko min.js and <1Ko min.css.
 
 # Infos
  - Get bigger when the mouse is next to it.
@@ -18,18 +18,18 @@ jQuery based scrolling Bar, for PC and Smartphones (touch events). It is modern 
 # Dependencies
  - [jquery](https://jquery.com/)
  - [jquery.mousewheel](https://github.com/jquery/jquery-mousewheel)
- - [underscore](http://underscorejs.org/)
 
 
-# Demo
+# Live Demo
 When the user is far away, the scrollbar is hidden.
 When the user approach, the scrollbar appear.
 
-![Nice-Scrollbar Nice-Scrollbar](http://www.ti-r.com/images/js/tr.nice.scroll.gif)
+![Image to show animation of the Nice-Scrollbar when the mouse is getting close.](http://www.ti-r.com/images/js/tr.nice.scroll.gif)
 
 You can test it on my website.
 [www.ti-r.com (NiceScroll)](http://www.ti-r.com/?js/Web/NiceScroll)
 
+# Demo Files 
 There is 5 demos inside demos directory
 - demo-basic.html:
 	* It show how to use it with a very basic sample.
@@ -51,34 +51,34 @@ There is 5 demos inside demos directory
 # How to use it
 - Html:
 You need 2 div, the parent will own the scrollbar, the child will be scrolled.
-```html
-<div id="divNiceScrollSampleParent">
-	<div id="divNiceScrollSampleInside"></div>
-</div>
-```
+~~~html
+	<div id="divNiceScrollSampleParent">
+		<div id="divNiceScrollSampleInside"></div>
+	</div>
+~~~
 
 - CSS:
 "padding-right" enable to get some space when the scrollbar grow.
 "padding" enable to get some space for the text scrolled.
-```css
-#divNiceScrollSampleParent {
-	padding-right:10px;
-	height:152px;
-	width:580px;
-}
-
-#divNiceScrollSampleInside {
-	padding:5px;
-}
-```
+~~~css
+	#divNiceScrollSampleParent {
+		padding-right:10px;
+		height:152px;
+		width:580px;
+	}
+	
+	#divNiceScrollSampleInside {
+		padding:5px;
+	}
+~~~
 
 - Javascript:
-```js
-var niceScroll = new TR.NiceScroll("#divNiceScrollSampleInside");
-niceScroll.Add();
-// After you use it, you can remove it
-niceScroll.Remove();
-```
+~~~javascript
+	var niceScroll = new TR.NiceScroll("#divNiceScrollSampleInside");
+	niceScroll.Add();
+	// After you use it, you can remove remove it
+	niceScroll.Remove();
+~~~
 
 # Reason
 I needed a scrolling library for my personal website, and because I couldn't find a good one fitting all my needs, I just create my own :)
@@ -86,11 +86,24 @@ I needed a scrolling library for my personal website, and because I couldn't fin
 
 # Changelog
 
- - Version 1.3.1
+- Version 1.3.3
+	* Remove underscore dependency
+	* Fix bug where clicking on the scrollbar was not responding
+	* Add animation for clicking on background of the toolbar	
+
+- Version 1.3.2
+	* Remove CHANGELOG.md
+	* Change debug function
+	* Add debug option inside options
+	* Named listener event on mousemove
+	* add variable inside object
+	* rename vars
+
+- Version 1.3.1
 	* Bug fix on options
 	* Update scrollbar on parent resize.
 	
- - Version 1.3.0
+- Version 1.3.0
 	* Add/Remove events binding with namespace.
 	* Add a grandparent node automatically.
 	* Enable to force scrolling by scrolling more on extreme position (top or bottom) when 1 scroll element is child of another one. (enable by default)
@@ -99,15 +112,15 @@ I needed a scrolling library for my personal website, and because I couldn't fin
 		* Activate force scrolling
 		* Set force scrolling attempt before to continue to scroll over the screen
 	
- - Version 1.2.0
+- Version 1.2.0
 	* Fix a bug where too much content to scroll make the cursor too small.
 	* Fix a bug on placement for some cases.
 	* Add namespace for global vars
 		
- - Version 1.1.0
+- Version 1.1.0
 	* Insert scrollbar before parent of the div because of a Firefox Bug
 		- Firefox: bug scrollbar absolute position is moving on scrolling content
 
- - Version 1.0.0
+- Version 1.0.0
 	* Release
 	
