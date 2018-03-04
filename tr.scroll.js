@@ -1,6 +1,6 @@
 // Author: Ti-R (Renan Lavarec)
 // License: MIT
-// Version: 1.3.3
+// Version: 1.3.4
 
 // Namespace TR
 if( !TR )
@@ -124,10 +124,16 @@ TR.NiceScroll.prototype.Add = function()
 	var tDiv = $( this.mIdChild );
 	var tDivParent = tDiv.parent();
 	
+	// Save scroll position
+	var tSavePosScrolling = tDivParent.scrollTop();
+	
 	var tNodeHtml = '<div class="NodeNiceScroll" style="position:relative;"></div>';
 	$(tNodeHtml).insertBefore( tDivParent );
 	tDivParent.prev().append(tDivParent);
 
+	// Restore scroll position
+	tDivParent.scrollTop(tSavePosScrolling);
+	
 //	tDivParent.unbind("scroll").scroll(function(event) {
 //  		tThis.Debug( " PARENT: Handler for .scroll() called.", event  );
 //  		event.preventDefault();
@@ -222,6 +228,7 @@ TR.NiceScroll.prototype.Add = function()
 		if( tThis.mOptions.Debug )
 		{
 			tThis.Debug("_pixels:", _pixels);
+			tThis.Debug("tCurrentTopPos:", tCurrentTopPos);
 			tThis.Debug("tParentHeight:", tParentHeight);
 			tThis.Debug("tChildHeight:", tChildHeight);
 			tThis.Debug("tChildHeight-tParentHeight:", tChildHeight-tParentHeight);

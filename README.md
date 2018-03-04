@@ -19,18 +19,21 @@ jQuery based scrolling Bar, for PC and Smartphones (touch events). It is modern 
  - [jquery](https://jquery.com/)
  - [jquery.mousewheel](https://github.com/jquery/jquery-mousewheel)
 
-
-# Live Demo
+# Smart display
 When the user is far away, the scrollbar is hidden.
 When the user approach, the scrollbar appear.
 
 ![Image to show animation of the Nice-Scrollbar when the mouse is getting close.](http://www.ti-r.com/images/js/tr.nice.scroll.gif)
 
+
+# Live Demo
 You can test it on my website.
 [www.ti-r.com (NiceScroll)](http://www.ti-r.com/?js/Web/NiceScroll)
 
-# Demo Files 
+# Demo Files
+
 There is 5 demos inside demos directory
+
 - demo-basic.html:
 	* It show how to use it with a very basic sample.
 
@@ -86,21 +89,25 @@ I needed a scrolling library for my personal website, and because I couldn't fin
 
 # Changelog
 
+- Version 1.3.4
+	* Fix bug to restore the scrolltop position of the parent previously existing.
+		- Allow to restore the scroll positon of the user on the "Go Back" browser button on my website.
+
 - Version 1.3.3
-	* Remove underscore dependency
-	* Fix bug where clicking on the scrollbar was not responding
-	* Add animation for clicking on background of the toolbar	
+	* Remove underscore dependency.
+	* Fix bug where clicking on the scrollbar was not responding.
+	* Add animation for clicking on background of the toolbar.	
 
 - Version 1.3.2
 	* Remove CHANGELOG.md
-	* Change debug function
-	* Add debug option inside options
-	* Named listener event on mousemove
-	* add variable inside object
-	* rename vars
+	* Change debug function.
+	* Add debug option inside options.
+	* Named listener event on mousemove.
+	* Add variable inside object.
+	* Rename vars.
 
 - Version 1.3.1
-	* Bug fix on options
+	* Bug fix on options.
 	* Update scrollbar on parent resize.
 	
 - Version 1.3.0
@@ -115,7 +122,7 @@ I needed a scrolling library for my personal website, and because I couldn't fin
 - Version 1.2.0
 	* Fix a bug where too much content to scroll make the cursor too small.
 	* Fix a bug on placement for some cases.
-	* Add namespace for global vars
+	* Add namespace for global vars.
 		
 - Version 1.1.0
 	* Insert scrollbar before parent of the div because of a Firefox Bug
