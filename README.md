@@ -89,6 +89,11 @@ I needed a scrolling library for my personal website, and because I couldn't fin
 
 # Changelog
 
+- Version 1.3.5
+	* Fix bug with touch devices.
+		- Emitting a clicking event on the "touch end" event if the div is not scrolling.
+	* Added option to parameter the Sensibility Touch in px to consider a click.
+
 - Version 1.3.4
 	* Fix bug to restore the scrolltop position of the parent previously existing.
 		- Allow to restore the scroll positon of the user on the "Go Back" browser button on my website.

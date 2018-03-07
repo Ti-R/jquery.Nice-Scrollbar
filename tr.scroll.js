@@ -36,6 +36,10 @@ TR.NiceScroll = function ( _id_child, options )
 	
 	// Enable to force scrolling 
 	this.mOptions.EnableForceScrolling = true;
+	
+	// Sensibility Touch in px to consider a click
+	this.mOptions.SensibilityTouch = 2;
+	
 	// END ---- OPTIONS ----
 	
 	// Id Child
@@ -49,6 +53,7 @@ TR.NiceScroll = function ( _id_child, options )
 
 	// Save touch move
 	this.mTouchMouse = {y: 0};	
+	this.mTouchMouseStart = {x: 0, y: 0};	
 	
 	// Merge options
 	if( options )
@@ -109,6 +114,7 @@ TR.NiceScroll.prototype.Remove = function()
 	tDiv.unbind("mousewheel.tr_scroll");
 	
 	tDiv.unbind("touchstart.tr_scroll");
+	tDiv.unbind("touchend.tr_scroll");
 	
 	tDiv.unbind("touchmove.tr_scroll");
 	
@@ -160,12 +166,30 @@ TR.NiceScroll.prototype.Add = function()
 		// Can give the event to the parent	
 		return true; 
 	});
+	/*
+	tDiv.unbind("touchend.tr_scroll").children().bind('touchend.tr_scroll', function(event) {
+
+		if( event.originalEvent.changedTouches[0].pageY<tThis.mTouchMouseStart.y+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageY>tThis.mTouchMouseStart.y-tThis.mOptions.SensibilityTouch)
+		{
+			if( event.originalEvent.changedTouches[0].pageX<tThis.mTouchMouseStart.x+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageX>tThis.mTouchMouseStart.x-tThis.mOptions.SensibilityTouch)
+			{
+		tThis.Debug("touchend.tr_scroll", x ,y );
+				document.elementFromPoint(x, y).click();
+				// Can give the event to the parent	
+				return true; 
+			}
+		}
+		// Can give the event to the parent	
+		return false; 
+	});*/
+		
 	
 	tDiv.unbind("touchstart.tr_scroll").children().bind('touchstart.tr_scroll', function(event) {
 		
 		tThis.Debug("touchstart.tr_scroll");
 		  
-		tThis.mTouchMouse.y = event.originalEvent.changedTouches[0].pageY;
+		tThis.mTouchMouseStart.x = event.originalEvent.changedTouches[0].pageX;
+		tThis.mTouchMouseStart.y = tThis.mTouchMouse.y = event.originalEvent.changedTouches[0].pageY;
 			
 		$(this).unbind("touchmove.tr_scroll").bind('touchmove.tr_scroll', function(event) {
 	/*		event.preventDefault();
@@ -195,12 +219,27 @@ TR.NiceScroll.prototype.Add = function()
 		
 		$(this).unbind("touchend.tr_scroll").bind('touchend.tr_scroll', function(event) {
 			tThis.Debug("touchend");	
+			
+			if( event.originalEvent.changedTouches[0].pageY<tThis.mTouchMouseStart.y+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageY>tThis.mTouchMouseStart.y-tThis.mOptions.SensibilityTouch)
+			{
+				if( event.originalEvent.changedTouches[0].pageX<tThis.mTouchMouseStart.x+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageX>tThis.mTouchMouseStart.x-tThis.mOptions.SensibilityTouch)
+				{
+					tThis.Debug("touchend.tr_scroll", tThis.mTouchMouseStart.x ,tThis.mTouchMouseStart.y );
+					document.elementFromPoint(tThis.mTouchMouseStart.x, tThis.mTouchMouseStart.y).click();
+				}
+			}
+			
 			UnbindAll.call(this);
+			// Can give the event to the parent	
+			return true; 
 		});
 		
 		$(this).unbind("touchcancel.tr_scroll").bind('touchcancel.tr_scroll', function(event) {
  			tThis.Debug("touchcancel");	
 			UnbindAll.call(this);
+			
+			// Can give the event to the parent	
+			return true; 
 		});
 
 		// Can give the event to the parent	
