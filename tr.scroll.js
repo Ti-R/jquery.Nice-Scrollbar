@@ -1,6 +1,6 @@
 // Author: Ti-R (Renan Lavarec)
 // License: MIT
-// Version: 1.3.4
+// Version: 1.3.6
 
 // Namespace TR
 if( !TR )
@@ -38,7 +38,7 @@ TR.NiceScroll = function ( _id_child, options )
 	this.mOptions.EnableForceScrolling = true;
 	
 	// Sensibility Touch in px to consider a click
-	this.mOptions.SensibilityTouch = 2;
+	this.mOptions.SensibilityTouch = 10;
 	
 	// END ---- OPTIONS ----
 	
@@ -166,23 +166,6 @@ TR.NiceScroll.prototype.Add = function()
 		// Can give the event to the parent	
 		return true; 
 	});
-	/*
-	tDiv.unbind("touchend.tr_scroll").children().bind('touchend.tr_scroll', function(event) {
-
-		if( event.originalEvent.changedTouches[0].pageY<tThis.mTouchMouseStart.y+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageY>tThis.mTouchMouseStart.y-tThis.mOptions.SensibilityTouch)
-		{
-			if( event.originalEvent.changedTouches[0].pageX<tThis.mTouchMouseStart.x+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageX>tThis.mTouchMouseStart.x-tThis.mOptions.SensibilityTouch)
-			{
-		tThis.Debug("touchend.tr_scroll", x ,y );
-				document.elementFromPoint(x, y).click();
-				// Can give the event to the parent	
-				return true; 
-			}
-		}
-		// Can give the event to the parent	
-		return false; 
-	});*/
-		
 	
 	tDiv.unbind("touchstart.tr_scroll").children().bind('touchstart.tr_scroll', function(event) {
 		
@@ -220,9 +203,9 @@ TR.NiceScroll.prototype.Add = function()
 		$(this).unbind("touchend.tr_scroll").bind('touchend.tr_scroll', function(event) {
 			tThis.Debug("touchend");	
 			
-			if( event.originalEvent.changedTouches[0].pageY<tThis.mTouchMouseStart.y+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageY>tThis.mTouchMouseStart.y-tThis.mOptions.SensibilityTouch)
+			if( event.originalEvent.changedTouches[0].pageY<(tThis.mTouchMouseStart.y+tThis.mOptions.SensibilityTouch) && event.originalEvent.changedTouches[0].pageY>(tThis.mTouchMouseStart.y-tThis.mOptions.SensibilityTouch))
 			{
-				if( event.originalEvent.changedTouches[0].pageX<tThis.mTouchMouseStart.x+tThis.mOptions.SensibilityTouch && event.originalEvent.changedTouches[0].pageX>tThis.mTouchMouseStart.x-tThis.mOptions.SensibilityTouch)
+				if( event.originalEvent.changedTouches[0].pageX<(tThis.mTouchMouseStart.x+tThis.mOptions.SensibilityTouch) && event.originalEvent.changedTouches[0].pageX>(tThis.mTouchMouseStart.x-tThis.mOptions.SensibilityTouch))
 				{
 					tThis.Debug("touchend.tr_scroll", tThis.mTouchMouseStart.x ,tThis.mTouchMouseStart.y );
 					document.elementFromPoint(tThis.mTouchMouseStart.x, tThis.mTouchMouseStart.y).click();

@@ -89,6 +89,9 @@ I needed a scrolling library for my personal website, and because I couldn't fin
 
 # Changelog
 
+- Version 1.3.6
+	* Default value ajusted to 10 px radius for sensibility touch parameter.
+
 - Version 1.3.5
 	* Fix bug with touch devices.
 		- Emitting a clicking event on the "touch end" event if the div is not scrolling.
