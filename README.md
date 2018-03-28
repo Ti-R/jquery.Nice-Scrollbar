@@ -1,5 +1,5 @@
 # Nice-Scrollbar
-jQuery based scrolling Bar, for PC and Smartphones (touch events). It is modern slim, easy to integrate, easy to use. Tested on Firefox/Chrome/Maxthon/iPhone/Android. Very light <7ko min.js and <1Ko min.css.
+Responsive jQuery based scrolling Bar, for PC and Smartphones (touch events). It is modern slim, easy to integrate, easy to use. Tested on Firefox/Chrome/Maxthon/iPhone/Android. Very light <7ko min.js and <1Ko min.css.
 
 # Infos
  - Get bigger when the mouse is next to it.
