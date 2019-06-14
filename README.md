@@ -83,6 +83,8 @@ niceScroll.Remove();
 # Reason
 I needed a scrolling library for my personal website, and because I couldn't find a good one fitting all my needs, I just create my own :)
 
+# License
+The MIT License (MIT), check "LICENSE" file.
 
 # Changelog
 
