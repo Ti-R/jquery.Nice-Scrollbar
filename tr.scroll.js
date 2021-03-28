@@ -1,6 +1,6 @@
 // Author: Ti-R (Renan Lavarec)
 // License: MIT
-// Version: 1.3.6
+// Version: 1.3.8
 
 // Namespace TR
 if( !TR )
@@ -79,7 +79,7 @@ TR.NiceScroll.prototype.Debug = function( _msg )
 ///
 TR.NiceScroll.prototype.Remove = function()
 {
-	var tDiv = $( this.mIdChild );
+	var tDiv = jQuery( this.mIdChild );
 	var tDivParent = tDiv.parent();
 	
 	// Get NodeNiceScroll
@@ -127,14 +127,14 @@ TR.NiceScroll.prototype.Add = function()
 {
 	this.Remove();
 	var tThis = this;
-	var tDiv = $( this.mIdChild );
+	var tDiv = jQuery( this.mIdChild );
 	var tDivParent = tDiv.parent();
 	
 	// Save scroll position
 	var tSavePosScrolling = tDivParent.scrollTop();
 	
 	var tNodeHtml = '<div class="NodeNiceScroll" style="position:relative;"></div>';
-	$(tNodeHtml).insertBefore( tDivParent );
+	jQuery(tNodeHtml).insertBefore( tDivParent );
 	tDivParent.prev().append(tDivParent);
 
 	// Restore scroll position
@@ -174,7 +174,7 @@ TR.NiceScroll.prototype.Add = function()
 		tThis.mTouchMouseStart.x = event.originalEvent.changedTouches[0].pageX;
 		tThis.mTouchMouseStart.y = tThis.mTouchMouse.y = event.originalEvent.changedTouches[0].pageY;
 			
-		$(this).unbind("touchmove.tr_scroll").bind('touchmove.tr_scroll', function(event) {
+		jQuery(this).unbind("touchmove.tr_scroll").bind('touchmove.tr_scroll', function(event) {
 	/*		event.preventDefault();
 			
 		//	if( event.originalEvent.changedTouches[0].pageY-tThis.mTouchMouse.y > 10)
@@ -197,10 +197,10 @@ TR.NiceScroll.prototype.Add = function()
 		
 		function UnbindAll()
 		{
-			$(this).unbind("touchend.tr_scroll").unbind("touchcancel.tr_scroll");
+			jQuery(this).unbind("touchend.tr_scroll").unbind("touchcancel.tr_scroll");
 		}
 		
-		$(this).unbind("touchend.tr_scroll").bind('touchend.tr_scroll', function(event) {
+		jQuery(this).unbind("touchend.tr_scroll").bind('touchend.tr_scroll', function(event) {
 			tThis.Debug("touchend");	
 			
 			if( event.originalEvent.changedTouches[0].pageY<(tThis.mTouchMouseStart.y+tThis.mOptions.SensibilityTouch) && event.originalEvent.changedTouches[0].pageY>(tThis.mTouchMouseStart.y-tThis.mOptions.SensibilityTouch))
@@ -217,7 +217,7 @@ TR.NiceScroll.prototype.Add = function()
 			return true; 
 		});
 		
-		$(this).unbind("touchcancel.tr_scroll").bind('touchcancel.tr_scroll', function(event) {
+		jQuery(this).unbind("touchcancel.tr_scroll").bind('touchcancel.tr_scroll', function(event) {
  			tThis.Debug("touchcancel");	
 			UnbindAll.call(this);
 			
@@ -390,7 +390,7 @@ TR.NiceScroll.prototype.Add = function()
 				tHtml += '</div>';
 			tHtml += '</div>';
 			//tDivParent.prepend(tHtml);
-			$(tHtml).insertBefore( tDivParent );
+			jQuery(tHtml).insertBefore( tDivParent );
 
 			var tScrollingMoving = false;
 			var tMousePosInYOnMouseDown = TR.MouseMove.y;
@@ -446,16 +446,16 @@ TR.NiceScroll.prototype.Add = function()
 				
 			    tScrollingMoving = true;
 			    
-			    $('body').append('<div class="tr_scrollbar_scrolling_dontloose_focus tr_scrollbar_invible"></div>');
-				$('.tr_scrollbar_scrolling_dontloose_focus').css("position", "fixed")
+			    jQuery('body').append('<div class="tr_scrollbar_scrolling_dontloose_focus tr_scrollbar_invible"></div>');
+				jQuery('.tr_scrollbar_scrolling_dontloose_focus').css("position", "fixed")
 														.css("top",(tScrollBar.offset().top-200)+"px")
 														.css("left", tScrollBar.offset().left-200+"px")
 														.css("height",(tParentHeight+400)+"px")
 														.css("width", "440px");
-			    $('body').addClass("tr_forbid_selection");
+			    jQuery('body').addClass("tr_forbid_selection");
 			    
 				    
-				$('.tr_scrollbar_scrolling_dontloose_focus').mouseup(function() {
+				jQuery('.tr_scrollbar_scrolling_dontloose_focus').mouseup(function() {
 				    StopMovingScrollBar();
 				}).mouseleave(function() {
 				    StopMovingScrollBar();
@@ -473,8 +473,8 @@ TR.NiceScroll.prototype.Add = function()
 			function StopMovingScrollBar()
 			{
 			    tScrollingMoving = false;
-			    $('.tr_scrollbar_scrolling_dontloose_focus').remove();
-			    $('body').removeClass("tr_forbid_selection");
+			    jQuery('.tr_scrollbar_scrolling_dontloose_focus').remove();
+			    jQuery('body').removeClass("tr_forbid_selection");
 			    TR.SetScrollBarSmaller( tIdChild );
 			}
 			
@@ -508,7 +508,7 @@ TR.SetScrollBarBigger = function( _id_child, _set_hover  )
 {
 	_set_hover = _set_hover || false;
 	
-	var tDiv = $( _id_child );
+	var tDiv = jQuery( _id_child );
 	var tDivParent = tDiv.parent();
 	
 
@@ -528,7 +528,7 @@ TR.SetScrollBarBigger = function( _id_child, _set_hover  )
 
 TR.SetScrollBarSmaller = function( _id_child  )
 {
-	var tDiv = $( _id_child );
+	var tDiv = jQuery( _id_child );
 	var tDivParent = tDiv.parent();
 	
 	//var tScrollBar= tDivParent.children('.tr_scrollbar')

@@ -91,6 +91,9 @@ The MIT License (MIT), check "LICENSE" file.
 
 # Changelog
 
+- Version 1.3.8
+	* Use jQuery instead of $ for some website compatibility.
+
 - Version 1.3.7
 	* Fix error if the script if included before the body of the document declared.
 
