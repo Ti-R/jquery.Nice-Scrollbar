@@ -11,8 +11,8 @@ if( !TR.MouseMove )
 	TR.MouseMove = {x: 0, y: 0};
 
 // Test if document got class, if not add it and bind the event
-if (document.body.querySelector('mousemove_tr') === null) {
-	document.body.className += ' mousemove_tr';
+if (document.querySelector('mousemove_tr') === null) {
+	document.className += ' mousemove_tr';
 	document.addEventListener('mousemove', function(e){ 
 		TR.MouseMove.x = e.clientX || e.pageX; 
 	    TR.MouseMove.y = e.clientY || e.pageY;

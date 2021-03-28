@@ -91,6 +91,9 @@ The MIT License (MIT), check "LICENSE" file.
 
 # Changelog
 
+- Version 1.3.7
+	* Fix error if the script if included before the body of the document declared.
+
 - Version 1.3.6
 	* Default value ajusted to 10 px radius for sensibility touch parameter.
 
